@@ -1,9 +1,9 @@
 ---
 template: index.hbs
-title: "midas: A syntax highlighter built on top of PostCSS."
+title: "midas: A CSS syntax highlighter built on top of PostCSS."
 ---
 
-<p class="byline">A syntax highlighter built on top of <a href="https://github.com/postcss/postcss">PostCSS</a>.</p>
+<p class="byline">A CSS syntax highlighter built on top of <a href="https://github.com/postcss/postcss">PostCSS</a>.</p>
 
 ```css
 @charset "UTF-8";
