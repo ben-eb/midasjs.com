@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>midas: A syntax highlighter built on top of PostCSS.</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <link rel="icon" type="image/svg" href="/images/favicon.svg">
+</head>
+<body>
+
+<a href="https://github.com/ben-eb/midas"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+    <a href="/"><img src="/images/logo-main.svg" class="logo"></a>
+    <p class="byline">A syntax highlighter built on top of <a href="https://github.com/postcss/postcss">PostCSS</a>.</p>
+
+<pre class="midas"><code><span class="midas__at-rule"><span class="midas__at-rule-name">@charset</span> <span class="midas__string">"UTF-8"</span><span class="midas__semicolon">;</span></span>
+
+<span class="midas__selector"><span class="midas__tag">a</span><span class="midas__attribute"><span class="midas__attribute-brace">[</span><span class="midas__attribute-name">href</span><span class="midas__attribute-operator">*=</span><span class="midas__attribute-value">"test"</span><span class="midas__attribute-brace">]</span></span></span> <span class="midas__brace">{</span>
+  <span class="midas__property">font-weight</span><span class="midas__colon">: </span><span class="midas__value"><span class="midas__number">700</span></span><span class="midas__semicolon">;</span>
+<span class="midas__brace">}</span>
+
+<span class="midas__selector"><span class="midas__id">#h1</span></span> <span class="midas__brace">{</span>
+  <span class="midas__property">color</span><span class="midas__colon">: </span><span class="midas__value"><span class="midas__hex-color">#<span class="midas__hex-value">000</span></span></span><span class="midas__important">!important</span><span class="midas__semicolon">;</span>
+  <span class="midas__property">background</span><span class="midas__colon">: </span><span class="midas__value"><span class="midas__function"><span class="midas__function-name">url</span><span class="midas__parenthesis">(</span><span class="midas__string">'cat.jpg'</span><span class="midas__parenthesis">)</span></span> <span class="midas__word">no-repeat</span></span><span class="midas__semicolon">;</span>
+<span class="midas__brace">}</span>
+
+<span class="midas__selector"><span class="midas__universal">*</span></span> <span class="midas__brace">{</span>
+  <span class="midas__property">color</span><span class="midas__colon">: </span><span class="midas__value"><span class="midas__function"><span class="midas__function-name">rgba</span><span class="midas__parenthesis">(</span><span class="midas__number">255</span>, <span class="midas__number">255</span>, <span class="midas__number">255</span>, <span class="midas__number">0.5</span><span class="midas__parenthesis">)</span></span></span><span class="midas__semicolon">;</span>
+<span class="midas__brace">}</span>
+
+<span class="midas__comment">/**
+ * block comment
+ */</span>
+
+<span class="midas__selector"><span class="midas__class">.class</span>, <span class="midas__tag">a</span><span class="midas__pseudo">:before</span></span> <span class="midas__brace">{</span>
+  <span class="midas__property">content</span><span class="midas__colon">: </span><span class="midas__value"><span class="midas__string">'Hello!'</span></span><span class="midas__semicolon">;</span>
+<span class="midas__brace">}</span>
+
+<span class="midas__at-rule"><span class="midas__at-rule-name">@media</span> only <span class="midas__at-rule-keyword">screen</span> and <span class="midas__parenthesis">(</span><span class="midas__property">min-width</span><span class="midas__colon">:</span> <span class="midas__number">500px</span><span class="midas__parenthesis">)</span></span> <span class="midas__brace">{</span>
+  <span class="midas__selector"><span class="midas__class">.class</span></span> <span class="midas__brace">{</span>
+    <span class="midas__property"><span class="midas__vendor-prefix">-webkit-</span>border-radius</span><span class="midas__colon">: </span><span class="midas__value"><span class="midas__number">6px</span></span><span class="midas__semicolon">;</span>
+            <span class="midas__property">border-radius</span><span class="midas__colon">: </span><span class="midas__value"><span class="midas__number">6px</span></span><span class="midas__semicolon">;</span>
+  <span class="midas__brace">}</span>
+<span class="midas__brace">}</span></code></pre><h2 id="features">Features</h2>
+<ul>
+<li>94 different <a href="https://github.com/chriskempson/base16">Base 16 themes</a> - 47
+palettes with light &amp; dark variants.</li>
+<li>Highly customisable markup with loads of styling hooks.</li>
+<li>Detects HTML tags, vendor prefixes &amp; media query types.</li>
+<li>Use standalone or with PostCSS plugins.</li>
+</ul>
+<h2 id="api">API</h2>
+<h3 id="-midas-css-"><code>midas(css)</code></h3>
+<p>midas exposes a PostCSS processor instance. This means that you can use it
+both asynchronously:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> midas = require('midas');
+
+midas('h1{}').then(function (<span class="hljs-literal">result</span>) {
+    console.log(<span class="hljs-literal">result</span>.content); // <span class="hljs-type">HTML</span> output
+});</code></pre><p>Or you can use the synchronous API:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> midas = require('midas');
+
+<span class="hljs-keyword">var</span> <span class="hljs-literal">result</span> = midas('h1{}').content;
+console.log(<span class="hljs-literal">result</span>); // <span class="hljs-type">HTML</span> output</code></pre><p>This will output (indentation added for readability):</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">pre</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"midas"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">code</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"midas__selector"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"midas__tag"</span>&gt;</span>h1<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"midas__brace"</span>&gt;</span>{<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"midas__brace"</span>&gt;</span>}<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">code</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">pre</span>&gt;</span></code></pre><h4 id="css">css</h4>
+<ul>
+<li>Type: <code>string</code></li>
+<li><em>Required option.</em></li>
+</ul>
+<p>Pass a CSS string to highlight.</p>
+<h3 id="cli">CLI</h3>
+<p>midas also ships with a CLI app. To see the available options, just run:</p>
+<pre><code class="lang-sh">midas <span class="hljs-comment">--help</span></code></pre><h3 id="-postcss-process-css-stringifier-midas-"><code>postcss().process(css, {stringifier: midas})</code></h3>
+<p>midas can also be loaded into an existing PostCSS instance, so that you can
+highlight CSS that is transformed by PostCSS plugins.</p>
+<h2 id="install">Install</h2>
+<p>With npm do:</p>
+<p><a class="install" href="https://npmjs.org/package/midas"></p>
+<pre><code class="lang-sh">npm <span class="hljs-keyword">install</span> midas</code></pre><p></a></p>
+
+        <footer>
+            <p>Distributed under the MIT License. Made with love by <a href="http://beneb.info">Ben Briggs</a> &amp; <a href="https://github.com/ben-eb/midas/graphs/contributors">contributors</a>.</p>
+            <p><img src="/images/logo-alt.svg" width="80" height="80"></p>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,9 @@
+primary_yellow:         hsla(42, 95%, 55%, 1)
+primary_yellow_hover:   hsla(42, 95%, 45%, 1)
+primary_text_color:     hsla(28, 27%, 22%, 1)
+
+secondary_text_color:   hsla(28, 10%, 45%, 1)
+
+border_color:           hsla(153, 10%, 95%, 1)
+
+code_description:       hsla(153, 40%, 75%, 1)

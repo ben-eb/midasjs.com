@@ -1,0 +1,186 @@
+@import './syntax.css';
+
+@font-face {
+    font-family: GreyaAle;
+    src: url('../fonts/greyaale.woff') format('woff');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: GreyaAle;
+    src: url('../fonts/greyaaleitalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: GreyaAle;
+    src: url('../fonts/greyaalebold.woff') format('woff');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Ampersand;
+    src: local(Baskerville-italic), local(Palatino), local(Book Antiqua);
+    unicode-range: U+26;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 50px auto;
+    color: map(primary_text_color);
+    font: 1rem/1.5 Ampersand, GreyaAle, Helvetica, Arial, sans-serif;
+    padding: 10px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    line-height: 2;
+}
+
+.midas:before {
+    content: url('../images/hand.svg');
+    display: block;
+    position: absolute;
+    left: -300px;
+    width: 280px;
+    height: 453px;
+}
+
+a {
+    text-decoration: none;
+    font-weight: bold;
+    color: map(primary_yellow);
+    transition: color 1s ease;
+    &:hover {
+        color: map(primary_yellow_hover);
+        transition: color .2s ease;
+    }
+}
+
+h1, h2 {
+    font-weight: normal;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font: 1.5rem/1.5 Ampersand, GreyaAle, Georgia, serif;
+}
+
+.install pre {
+    margin: 0;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.install pre code {
+    height: 48px;
+    position: relative;
+    overflow: hidden;
+    transition: color .1s ease;
+    font-size: 1em;
+}
+
+.install pre code:hover {
+    color: #fff;
+}
+
+.install {
+    margin-top: 2rem;
+    font-weight: normal;
+}
+
+.install pre code:after {
+    background: map(primary_yellow);
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    transform: translateY(48px);
+    transition: transform .1s ease;
+}
+
+.install pre code:hover:after {
+    transform: translateY(0);
+}
+
+.logo {
+    display: block;
+    margin: 0 auto;
+    width: 40%;
+    max-width: 200px;
+}
+
+.byline {
+    padding: 2rem 0;
+    font: italic 1.5rem/1.5 Ampersand, GreyaAle, Georgia, serif;
+    text-align: center;
+    margin: 0;
+    color: map(secondary_text_color);
+    & a {
+        font-weight: normal;
+    }
+}
+
+.text-center {
+    text-align: center;
+}
+
+footer {
+    padding: 2rem 0;
+    font: 1rem/1.5 Ampersand, GreyaAle, Georgia, serif;
+    color: map(secondary_text_color);
+    text-align: center;
+    & p + p {
+        margin-top: 50px;
+    }
+}
+
+@media screen and (min-width: 480px) {
+    .btn-group .btn {
+        flex: 0 1 45%;
+        margin-bottom: 0;
+    }
+
+    .install pre {
+        margin-bottom: 0;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    body {
+        width: 80%;
+        max-width: 640px;
+    }
+
+    .byline {
+        font-size: 2rem;
+        padding: 5rem 0;
+    }
+
+    h2 {
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    li:before {
+        width: 12px;
+        height: 12px;
+        content: '';
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 5px;
+        background: url('../images/logo-bullet.svg') center center;
+    }
+}

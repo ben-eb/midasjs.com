@@ -1,0 +1,205 @@
+/*
+
+    Name:       Base16 Midas Light
+    Author:     Ben Briggs (http://beneb.info)
+
+    highlight.js v8.0 template by Jan T. Sott (https://github.com/idleberg/base16-highlight.js)
+    Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16)
+
+*/
+
+/* Midas Comment */
+.hljs-comment,
+.hljs-title {
+  color: #bb8a17;
+}
+
+/* Midas Red */
+.hljs-variable,
+.hljs-attribute,
+.hljs-tag,
+.hljs-regexp,
+.ruby .hljs-constant,
+.xml .hljs-tag .hljs-title,
+.xml .hljs-pi,
+.xml .hljs-doctype,
+.html .hljs-doctype,
+.css .hljs-id,
+.css .hljs-class,
+.css .hljs-pseudo {
+  color: #fb5d20;
+}
+
+/* Midas Orange */
+.hljs-number,
+.hljs-preprocessor,
+.hljs-built_in,
+.hljs-literal,
+.hljs-params,
+.hljs-constant {
+  color: #fb9322;
+}
+
+/* Midas Yellow */
+.ruby .hljs-class .hljs-title,
+.css .hljs-rules .hljs-attribute {
+  color: #fcae29;
+}
+
+/* Midas Green */
+.hljs-string,
+.hljs-value,
+.hljs-inheritance,
+.hljs-header,
+.ruby .hljs-symbol,
+.xml .hljs-cdata {
+  color: #757f42;
+}
+
+/* Midas Aqua */
+.css .hljs-hexcolor {
+  color: #5f8071;
+}
+
+/* Midas Blue */
+.hljs-function,
+.python .hljs-decorator,
+.python .hljs-title,
+.ruby .hljs-function .hljs-title,
+.ruby .hljs-title .hljs-keyword,
+.perl .hljs-sub,
+.javascript .hljs-title,
+.coffeescript .hljs-title {
+  color: #5c767e;
+}
+
+/* Midas Purple */
+.hljs-keyword,
+.javascript .hljs-function {
+  color: #8e5d77;
+}
+
+.coffeescript .javascript,
+.javascript .xml,
+.tex .hljs-formula,
+.xml .javascript,
+.xml .vbscript,
+.xml .css,
+.xml .hljs-cdata {
+  opacity: 0.5;
+}
+
+/**
+ * Base 16 Midas, by Ben Briggs (http://beneb.info)
+ * Midas template by Ben Briggs (http://beneb.info)
+ * Original scheme by Chris Kempson (https://github.com/chriskempson/base16)
+ */
+
+.midas {
+    background: #ffffff;
+    color: #7D5C10;
+    position: relative;
+}
+
+.midas__property {
+    font-style: italic;
+}
+
+.midas__comment {
+    color: #FBCA57;
+}
+
+.midas__string {
+    color: #757F42;
+}
+
+.midas__function-name {
+    color: #5F8071;
+}
+
+.midas__important {
+    color: #757F42;
+}
+
+.midas__hex-value {
+    color: #FB9322;
+}
+
+.midas__hex-color {
+    color: #5F8071;
+}
+
+.midas__number,
+.midas__word {
+    color:#FB9322;
+}
+
+.midas__vendor-prefix {
+    color: #FBCA57;
+}
+
+/**
+ * Selectors
+ */
+
+.midas__selector {
+    color: #8E5D77;
+}
+
+.midas__tag {
+    color: #FB5D20;
+    text-decoration: underline;
+}
+
+.midas__id {
+    color: #5C767E;
+}
+
+.midas__attribute-name,
+.midas__class,
+.midas__pseudo {
+    color: #FB9322;
+}
+
+.midas__attribute-value {
+    color: #757F42;
+}
+
+/**
+ * At rules
+ */
+
+.midas__at-rule-name {
+    color: #8E5D77;
+}
+
+.midas__at-rule-keyword {
+    color: #FB9322;
+}
+
+code {
+    font-family: Menlo, Monaco, Consolas, monospace;
+}
+
+pre code {
+    display: block;
+    color: #7d5c10;
+    border: 2px solid map(primary_text_color);
+    border-radius: 12px;
+    padding: 10px;
+    text-align: left;
+    font-size: .8em;
+    white-space: pre-wrap;
+    word-break: break-all;
+    z-index: 2;
+}
+
+.lang-sh:before {
+    content: '$ ';
+    z-index: 2;
+}
+
+pre.midas code {
+    border: 3px solid map(primary_yellow);
+    border-radius: 24px;
+}
