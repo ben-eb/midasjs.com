@@ -47,7 +47,7 @@ a[href*="test"] {
 
 ## API
 
-### `midas(css)`
+### `midas(css, opts)`
 
 midas exposes a PostCSS processor instance. This means that you can use it
 both asynchronously:
@@ -90,6 +90,18 @@ This will output (indentation added for readability):
 * *Required option.*
 
 Pass a CSS string to highlight.
+
+#### opts
+
+* Type: `object`
+
+##### opts.wrap
+
+* Type: `boolean`
+* Default: `true`
+
+midas will wrap its output with `<pre class="midas"><code></code></pre>`, by
+default. To use your own container, set this option to `false`.
 
 ### CLI
 
