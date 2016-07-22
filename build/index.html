@@ -13,8 +13,7 @@
 <a href="https://github.com/ben-eb/midas"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
     <a href="/"><img src="/images/logo-main.svg" class="logo"></a>
     <p class="byline">A CSS syntax highlighter built on top of <a href="https://github.com/postcss/postcss">PostCSS</a>.</p>
-
-<pre class="midas"><code><span class="midas__at-rule"><span class="midas__at-rule-name">@charset</span> <span class="midas__string">"UTF-8"</span><span class="midas__semicolon">;</span></span>
+<pre><code class="hljs midas language-css"><span class="midas__at-rule"><span class="midas__at-rule-name">@charset</span> <span class="midas__string">"UTF-8"</span><span class="midas__semicolon">;</span></span>
 
 <span class="midas__selector"><span class="midas__tag">a</span><span class="midas__attribute"><span class="midas__attribute-brace">[</span><span class="midas__attribute-name">href</span><span class="midas__attribute-operator">*=</span><span class="midas__attribute-value">"test"</span><span class="midas__attribute-brace">]</span></span></span> <span class="midas__brace">{</span>
   <span class="midas__property">font-weight</span><span class="midas__colon">: </span><span class="midas__value"><span class="midas__number">700</span></span><span class="midas__semicolon">;</span>
@@ -42,62 +41,81 @@
     <span class="midas__property"><span class="midas__vendor-prefix">-webkit-</span>border-radius</span><span class="midas__colon">: </span><span class="midas__value"><span class="midas__number">6px</span></span><span class="midas__semicolon">;</span>
             <span class="midas__property">border-radius</span><span class="midas__colon">: </span><span class="midas__value"><span class="midas__number">6px</span></span><span class="midas__semicolon">;</span>
   <span class="midas__brace">}</span>
-<span class="midas__brace">}</span></code></pre><h2 id="features">Features</h2>
+<span class="midas__brace">}</span></code></pre>
+<h2 id="features">Features</h2>
 <ul>
 <li>94 different <a href="https://github.com/chriskempson/base16">Base 16 themes</a> - 47
 palettes with light &amp; dark variants.</li>
+<li>Outputs either HTML strings or virtual DOM trees for easy React integration.</li>
 <li>Highly customisable markup with loads of styling hooks.</li>
 <li>Detects HTML tags, vendor prefixes &amp; media query types.</li>
 <li>Use standalone or with PostCSS plugins.</li>
 </ul>
 <h2 id="api">API</h2>
-<h3 id="-midas-css-opts-"><code>midas(css, opts)</code></h3>
-<p>midas exposes a PostCSS processor instance. This means that you can use it
-both asynchronously:</p>
-<pre><code class="lang-js"><span class="hljs-keyword">var</span> midas = require('midas');
+<h3 id="const-midas--new-midasopts"><code>const midas = new Midas([opts])</code></h3>
+<p>However you consume midas, whether it is via PostCSS or standalone usage,
+you must instantiate it before it can be used for highlighting.</p>
+<pre><code class="hljs language-js"><span class="hljs-keyword">import</span> Midas <span class="hljs-keyword">from</span> <span class="hljs-string">'midas'</span>;
 
-midas('h1{}').then(function (<span class="hljs-literal">result</span>) {
-    console.log(<span class="hljs-literal">result</span>.content); // <span class="hljs-type">HTML</span> output
-});</code></pre><p>Or you can use the synchronous API:</p>
-<pre><code class="lang-js"><span class="hljs-keyword">var</span> midas = require('midas');
-
-<span class="hljs-keyword">var</span> <span class="hljs-literal">result</span> = midas('h1{}').content;
-console.log(<span class="hljs-literal">result</span>); // <span class="hljs-type">HTML</span> output</code></pre><p>This will output (indentation added for readability):</p>
-<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">pre</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"midas"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">code</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"midas__selector"</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"midas__tag"</span>&gt;</span>h1<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
-
-        <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"midas__brace"</span>&gt;</span>{<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"midas__brace"</span>&gt;</span>}<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">code</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">pre</span>&gt;</span></code></pre><h4 id="css">css</h4>
-<ul>
-<li>Type: <code>string</code></li>
-<li><em>Required option.</em></li>
-</ul>
-<p>Pass a CSS string to highlight.</p>
+<span class="hljs-keyword">const</span> midas = <span class="hljs-keyword">new</span> Midas();</code></pre>
 <h4 id="opts">opts</h4>
 <ul>
 <li>Type: <code>object</code></li>
 </ul>
-<h5 id="opts-wrap">opts.wrap</h5>
+<h5 id="optsstringify">opts.stringify</h5>
 <ul>
-<li>Type: <code>boolean</code></li>
+<li>Type: <code>Function|boolean</code>  </li>
+<li>Default: <code>toHTML</code></li>
+</ul>
+<p>Supply a function here to convert midas&#x27; internal HAST to a string. By default,
+this uses <a href="https://github.com/wooorm/hast-util-to-html">hast-util-to-html</a>.</p>
+<p>The function is supplied the internal HAST as the first parameter, then all
+other options are passed as arguments when the <code>process</code> method is called.</p>
+<p>If you supply <code>false</code> instead, midas will return its HAST. This is for better
+integration with consumers of virtual nodes, such as React.</p>
+<h5 id="optswrap">opts.wrap</h5>
+<ul>
+<li>Type: <code>boolean</code>  </li>
 <li>Default: <code>true</code></li>
 </ul>
-<p>midas will wrap its output with <code>&lt;pre class=&quot;midas&quot;&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt;</code>, by
-default. To use your own container, set this option to <code>false</code>.</p>
-<h3 id="cli">CLI</h3>
-<p>midas also ships with a CLI app. To see the available options, just run:</p>
-<pre><code class="lang-sh">midas <span class="hljs-comment">--help</span></code></pre><h3 id="-postcss-process-css-stringifier-midas-"><code>postcss().process(css, {stringifier: midas})</code></h3>
-<p>midas can also be loaded into an existing PostCSS instance, so that you can
-highlight CSS that is transformed by PostCSS plugins.</p>
+<p>By default, midas will wrap the output in <code>&lt;code&gt;&lt;/code&gt;</code>. This option wraps
+the <code>code</code> tag with <code>&lt;pre class=&quot;midas&quot;&gt;&lt;/pre&gt;</code>.</p>
+<h3 id="midasprocesscss-args"><code>midas.process(css, [...args])</code></h3>
+<p>Once midas has been initialised, you can start processing CSS strings.</p>
+<pre><code class="hljs language-js"><span class="hljs-keyword">import</span> Midas <span class="hljs-keyword">from</span> <span class="hljs-string">'midas'</span>;
+
+<span class="hljs-keyword">const</span> midas = <span class="hljs-keyword">new</span> Midas();
+<span class="hljs-keyword">const</span> output = midas.process(<span class="hljs-string">'h1{}'</span>);
+<span class="hljs-built_in">console</span>.log(output);</code></pre>
+<p>This will output (indentation added for readability):</p>
+<pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">pre</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"midas"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">code</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"midas__selector"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"midas__tag"</span>&gt;</span>h1<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"midas__brace"</span>&gt;</span>{<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"midas__brace"</span>&gt;</span>}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">code</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">pre</span>&gt;</span></code></pre>
+<h3 id="midasstringifier"><code>midas.stringifier</code></h3>
+<p>To use midas with PostCSS, you must initialise it and then supply the
+<code>stringifier</code> property. This allows you to highlight CSS that has
+optionally been transformed by PostCSS plugins.</p>
+<pre><code class="hljs language-js"><span class="hljs-keyword">import</span> Midas <span class="hljs-keyword">from</span> <span class="hljs-string">'midas'</span>;
+<span class="hljs-keyword">import</span> postcss <span class="hljs-keyword">from</span> <span class="hljs-string">'postcss'</span>;
+
+<span class="hljs-keyword">const</span> midas = <span class="hljs-keyword">new</span> Midas();
+<span class="hljs-keyword">const</span> output = postcss().process(<span class="hljs-string">'h1{}'</span>, {stringifier: midas.stringifier}).css;
+<span class="hljs-built_in">console</span>.log(output);</code></pre>
+<p>Note that due to the way that PostCSS stringifiers work, only string types
+can be returned. Therefore, if you need midas to output a virtual DOM,
+then you should not use this API.</p>
 <h2 id="install">Install</h2>
 <p>With npm do:</p>
 <p><a class="install" href="https://npmjs.org/package/midas"></p>
-<pre><code class="lang-sh">npm <span class="hljs-keyword">install</span> midas</code></pre><p></a></p>
+<pre><code class="hljs language-sh">npm install midas</code></pre>
+<p></a></p>
 
         <footer>
             <p>Distributed under the MIT License. Made with love by <a href="http://beneb.info">Ben Briggs</a> &amp; <a href="https://github.com/ben-eb/midas/graphs/contributors">contributors</a>.</p>

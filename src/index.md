@@ -41,32 +41,60 @@ a[href*="test"] {
 
 * 94 different [Base 16 themes](https://github.com/chriskempson/base16) - 47
   palettes with light & dark variants.
+* Outputs either HTML strings or virtual DOM trees for easy React integration.
 * Highly customisable markup with loads of styling hooks.
 * Detects HTML tags, vendor prefixes & media query types.
 * Use standalone or with PostCSS plugins.
 
 ## API
 
-### `midas(css, opts)`
+### `const midas = new Midas([opts])`
 
-midas exposes a PostCSS processor instance. This means that you can use it
-both asynchronously:
+However you consume midas, whether it is via PostCSS or standalone usage,
+you must instantiate it before it can be used for highlighting.
 
 ```js
-var midas = require('midas');
+import Midas from 'midas';
 
-midas('h1{}').then(function (result) {
-    console.log(result.content); // HTML output
-});
+const midas = new Midas();
 ```
 
-Or you can use the synchronous API:
+#### opts
+
+* Type: `object`
+
+##### opts.stringify
+
+* Type: `Function|boolean`  
+* Default: `toHTML`
+
+Supply a function here to convert midas' internal HAST to a string. By default,
+this uses [hast-util-to-html](https://github.com/wooorm/hast-util-to-html).
+
+The function is supplied the internal HAST as the first parameter, then all
+other options are passed as arguments when the `process` method is called.
+
+If you supply `false` instead, midas will return its HAST. This is for better
+integration with consumers of virtual nodes, such as React.
+
+##### opts.wrap
+
+* Type: `boolean`  
+* Default: `true`
+
+By default, midas will wrap the output in `<code></code>`. This option wraps
+the `code` tag with `<pre class="midas"></pre>`.
+
+### `midas.process(css, [...args])`
+
+Once midas has been initialised, you can start processing CSS strings.
 
 ```js
-var midas = require('midas');
+import Midas from 'midas';
 
-var result = midas('h1{}').content;
-console.log(result); // HTML output
+const midas = new Midas();
+const output = midas.process('h1{}');
+console.log(output);
 ```
 
 This will output (indentation added for readability):
@@ -84,37 +112,24 @@ This will output (indentation added for readability):
 </pre>
 ```
 
-#### css
+### `midas.stringifier`
 
-* Type: `string`
-* *Required option.*
+To use midas with PostCSS, you must initialise it and then supply the
+`stringifier` property. This allows you to highlight CSS that has
+optionally been transformed by PostCSS plugins.
 
-Pass a CSS string to highlight.
+```js
+import Midas from 'midas';
+import postcss from 'postcss';
 
-#### opts
-
-* Type: `object`
-
-##### opts.wrap
-
-* Type: `boolean`
-* Default: `true`
-
-midas will wrap its output with `<pre class="midas"><code></code></pre>`, by
-default. To use your own container, set this option to `false`.
-
-### CLI
-
-midas also ships with a CLI app. To see the available options, just run:
-
-```sh
-midas --help
+const midas = new Midas();
+const output = postcss().process('h1{}', {stringifier: midas.stringifier}).css;
+console.log(output);
 ```
 
-### `postcss().process(css, {stringifier: midas})`
-
-midas can also be loaded into an existing PostCSS instance, so that you can
-highlight CSS that is transformed by PostCSS plugins.
+Note that due to the way that PostCSS stringifiers work, only string types
+can be returned. Therefore, if you need midas to output a virtual DOM,
+then you should not use this API.
 
 ## Install
 
